@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Input Date</title>
 
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<head>
+    <title>Input Date</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
 	<style type="text/css">
 		.container {
@@ -24,66 +34,82 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script> 
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script> -->
     <script type="text/javascript">
         $(function () {
             $("#submit").click(function () {
                 var date = $("#datetimepicker12").data("DateTimePicker").date().toLocaleString()
-                console.log(date)
-                    window.parent.postMessage(JSON.stringify({
-                        event_code: 'ym-client-event', data: JSON.stringify({
-                            event: {
-                                code: "Date",
-                                data: {
-                                    selectedDate: date
-                                }
+                let newDate = date.split(' ');
+                console.log(`${newDate[0] + ' ' + newDate[1] + ' ' + newDate[2] + ' ' + newDate[3]}`);
+                window.parent.postMessage(JSON.stringify({
+                    event_code: 'ym-client-event', data: JSON.stringify({
+                        event: {
+                            code: "Date",
+                            data: {
+                                selectedDate: `${newDate[0] + ' ' + newDate[1] + ' ' + newDate[2] + ' ' + newDate[3]}`
                             }
-                        })
-                    }), '*');
-                    $('#custom :input').attr('disabled', 'disabled');
-                    $('#custom').fadeTo("slow", 0.15, function () {
-                        $(this).find(':input').attr('disabled', 'disabled');
-                        $(this).find('label').css('cursor', 'default');
-                        $('#add').append('Submitted');
-                    });
-            
+                        }
+                    })
+                }), '*');
+                $('#custom :input').attr('disabled', 'disabled');
+                $('#custom').fadeTo("slow", 0.15, function () {
+                    $(this).find(':input').attr('disabled', 'disabled');
+                    $(this).find('label').css('cursor', 'default');
+                    $('#add').append('Submitted');
+                });
+
             })
         })
     </script>
-	<script type='text/javascript'>
-		$( document ).ready(function() {
-  $('#datetimepicker').datetimepicker({
-    inline: true,
-    sideBySide: true,
-	  locale: 'de',
-		format: 'DD.MM.YYYY'
-  });
-		});
-	</script>
-    
-</head>
-<body>
-
-<div style="overflow:hidden;" id="custom">
-    <div class="form-group">
-        <div class="row">
-                <div id="datetimepicker12"></div>
-        </div>
-    </div>
-    <input type="submit" class="btn btn-info" value="Submit" id="submit">
-</div>
-
- <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker12').datetimepicker({
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $('#datetimepicker').datetimepicker({
                 inline: true,
-                format: 'LD',
-                sideBySide: true
+                sideBySide: true,
+                locale: 'de',
+                format: 'DD.MM.YYYY'
             });
         });
-       
     </script>
 
-		
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div id="datetimepicker4"></div>
+                <div class="modal-footer">
+                    <center>
+                        <button type="button" id="datetimepicker12" class="btn pmd-ripple-effect btn-primary">
+                            Select
+                        </button>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div style="overflow:hidden;" id="custom">
+        <div class="form-group">
+            <div class="row">
+                <div id="datetimepicker12"></div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info" value="Submit" id="submit">
+    </div> -->
+
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker12').datetimepicker({
+                    inline: true,
+                    format: 'LD',
+                    sideBySide: true
+                });
+            });
+
+        </script>
+
+
 </body>
+
 </html>
